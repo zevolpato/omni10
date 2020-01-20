@@ -1,6 +1,14 @@
 const express = require('express');
+const mongoose = require('mongoose');
 
-const app = express()
+const app = express();
+
+mongoose.connect('mongodb+srv://aula2020:aula2020@zevolpato-dk8di.mongodb.net/aula2020?retryWrites=true&w=majority',{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
+
+app.use(express.json())
 
 app.get('/users', (req,res) => {
     //console.log(req.query.search);
@@ -15,7 +23,7 @@ app.delete('/users/:id', (req,res) =>{
 
 app.post('/users', (req,res) =>{
     console.log(req.body)
-    return res.json({ message : 'inserir!!!!'})
+    return res.json({name : req.body.name})
 })
 
 app.listen(3000)
